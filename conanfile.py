@@ -56,7 +56,7 @@ class node_gyp(Generator):
         return t.render(targets=",\n".join(sections))
 
 
-class WafGeneratorPackage(ConanFile):
+class GypGeneratorPackage(ConanFile):
     name = "gyp-generator"
     version = "0.1"
     license = "MIT"
