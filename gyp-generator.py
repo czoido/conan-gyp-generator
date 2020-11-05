@@ -54,9 +54,3 @@ class node_gyp(Generator):
                 sections.append(t.render(**info))
         t = Template(gyp_template)
         return t.render(targets=",\n".join(sections))
-
-
-class GypGeneratorPackage(ConanFile):
-    name = "gyp-generator"
-    version = "0.1"
-    license = "MIT"
