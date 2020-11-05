@@ -2,14 +2,16 @@
 
 This [Conan generator](https://docs.conan.io/en/latest/howtos/custom_generators.html) will generate a
 gyp file with all the dependencies. The original intended use of this generator is to make easier
-link with third party libraries when adding native modules to node.
+link with third party libraries when adding native modules to node using node-gyp. 
 
-# To use:
+It's just a minimal implementation and has only been tested on MacOS and shared libraries.
+
+# To install the generator:
 
 ``` bash
 git clone https://github.com/czoido/conan-gyp-generator
 cd conan-gyp-generator
-conan create .
+conan config install gyp-generator.py -tf generators
 ```
 
 Create your consumer project ([see docs](https://docs.conan.io/en/latest/getting_started.html)) with
@@ -21,9 +23,6 @@ yaml-cpp/0.6.3
 
 [generators]
 node_gyp
-
-[build_requires]
-gyp-generator/0.1
 
 [options]
 yaml-cpp:shared=True
