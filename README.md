@@ -36,7 +36,6 @@ binding.gyp like this one:
     "targets": [{
         "target_name": "conan_node_module",
         "sources": ["main.cpp"],
-        "include_dirs": ["<!(node -e \"require('nan')\")"],
         "dependencies": ["<(module_root_dir)/conan_build/conanbuildinfo.gyp:yaml-cpp"],
         "conditions": [[
             "OS=='mac'", {
