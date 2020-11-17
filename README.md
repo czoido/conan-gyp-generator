@@ -6,6 +6,8 @@ link with third party libraries when adding native modules to node using node-gy
 
 It's just a minimal implementation and has only been tested on MacOS and shared libraries.
 
+Find some more detailed information in [this blogpost](https://czoido.github.io/posts/node-native-module-conan/).
+
 # To install the generator:
 
 ``` bash
