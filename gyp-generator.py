@@ -24,6 +24,7 @@ class node_gyp(Generator):
                         "{{ include_paths }}",
                         {%- endfor %}                    
                     ],
+                    {% if lib_paths -%}
                     "libraries": [
                         "-l{{ dep }}", 
                         {% for lib_path in lib_paths -%}
@@ -31,6 +32,7 @@ class node_gyp(Generator):
                         {%- endfor %}
                         "-Wl,-rpath,<(module_root_dir)/build/Release/"
                     ]
+                    {%- endif %}
                 }
             }
         """)
