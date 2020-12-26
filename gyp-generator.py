@@ -26,7 +26,9 @@ class node_gyp(Generator):
                     ],
                     {% if lib_paths -%}
                     "libraries": [
-                        "-l{{ dep }}", 
+                        {% for lib in libs -%}
+                        "-l{{ lib }}", 
+                        {%- endfor %}
                         {% for lib_path in lib_paths -%}
                         "-L{{ lib_path }}",
                         {%- endfor %}
@@ -48,7 +50,7 @@ class node_gyp(Generator):
             if dep not in self.get_build_requires_names():
                 info = {
                     "dep": dep,
-                    "libs": self.conanfile.deps_cpp_info[dep].lib_paths,
+                    "libs": self.conanfile.deps_cpp_info[dep].libs,
                     "lib_paths": self.conanfile.deps_cpp_info[dep].lib_paths,
                     "include_paths": self.conanfile.deps_cpp_info[dep].include_paths,
                 }
