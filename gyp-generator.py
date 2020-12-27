@@ -20,17 +20,21 @@ class node_gyp(Generator):
                 "type": "<(library)",
                 "direct_dependent_settings": {
                     "include_dirs": [
-                        {% for include_paths in include_paths -%}
-                        "{{ include_paths }}",
+                        {% for include_path in include_paths -%}
+                        "{{ include_path }}",
                         {%- endfor %}                    
                     ],
+                    {% if lib_paths -%}
                     "libraries": [
-                        "-l{{ dep }}", 
+                        {% for lib in libs -%}
+                        "-l{{ lib }}", 
+                        {%- endfor %}
                         {% for lib_path in lib_paths -%}
                         "-L{{ lib_path }}",
                         {%- endfor %}
                         "-Wl,-rpath,<(module_root_dir)/build/Release/"
                     ]
+                    {%- endif %}
                 }
             }
         """)
@@ -46,7 +50,7 @@ class node_gyp(Generator):
             if dep not in self.get_build_requires_names():
                 info = {
                     "dep": dep,
-                    "libs": self.conanfile.deps_cpp_info[dep].lib_paths,
+                    "libs": self.conanfile.deps_cpp_info[dep].libs,
                     "lib_paths": self.conanfile.deps_cpp_info[dep].lib_paths,
                     "include_paths": self.conanfile.deps_cpp_info[dep].include_paths,
                 }
