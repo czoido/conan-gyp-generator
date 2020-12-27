@@ -20,8 +20,8 @@ class node_gyp(Generator):
                 "type": "<(library)",
                 "direct_dependent_settings": {
                     "include_dirs": [
-                        {% for include_paths in include_paths -%}
-                        "{{ include_paths }}",
+                        {% for include_path in include_paths -%}
+                        "{{ include_path }}",
                         {%- endfor %}                    
                     ],
                     {% if lib_paths -%}
