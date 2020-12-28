@@ -13,5 +13,5 @@ class TestConanGypGenerator(object):
         run("conan config install gyp-generator.py -tf generators")
         run("git clone https://github.com/czoido/conan-node-module && cd conan-node-module && "
             "mkdir conan_build && cd conan_build && "
-            "npm install && "
-            "conan install .. --build=missing && npm install")
+            "conan install .. --build=missing && cd .. && "
+            "npm install")

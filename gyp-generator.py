@@ -1,8 +1,9 @@
 from jinja2 import Template
 
 from conans.model import Generator
-from conans import ConanFile
+from pathlib import PurePath
 import textwrap
+
 
 class node_gyp(Generator):
     @property
@@ -50,9 +51,9 @@ class node_gyp(Generator):
             if dep not in self.get_build_requires_names():
                 info = {
                     "dep": dep,
-                    "libs": self.conanfile.deps_cpp_info[dep].libs,
-                    "lib_paths": self.conanfile.deps_cpp_info[dep].lib_paths,
-                    "include_paths": self.conanfile.deps_cpp_info[dep].include_paths,
+                    "libs": [PurePath(folder).as_posix() for folder in self.conanfile.deps_cpp_info[dep].libs],
+                    "lib_paths": [PurePath(folder).as_posix() for folder in self.conanfile.deps_cpp_info[dep].lib_paths],
+                    "include_paths": [PurePath(folder).as_posix() for folder in self.conanfile.deps_cpp_info[dep].include_paths],
                 }
                 t = Template(target_template)
                 sections.append(t.render(**info))
